@@ -50,6 +50,8 @@ public final class EBookWebViewCoordinator: NSObject, WKScriptMessageHandler, WK
     }
 }
 
+// NOTE: 用来封装 webview 为 swift 组件，设置 webview
+
 public struct EBookWebView: UIViewRepresentable {
     var viewModel: EBookReaderViewModel
 
@@ -76,9 +78,9 @@ public struct EBookWebView: UIViewRepresentable {
         userContentController.add(LoggingMessageHandler(), name: "readerHandler")
 //        #endif
 
-        webView.addInteraction(viewModel.editingActions.editMenuInteraction)
-        webView.addInteraction(viewModel.highlightActions.editMenuInteraction)
-
+//        webView.addInteraction(viewModel.editingActions.editMenuInteraction)
+//        webView.addInteraction(viewModel.highlightActions.editMenuInteraction)
+//
         userContentController.add(context.coordinator, name: BookWebViewMessageHandlers.initiatedSwiftReader.rawValue)
 
         userContentController.add(context.coordinator,
@@ -103,19 +105,20 @@ public struct EBookWebView: UIViewRepresentable {
     }
 }
 
+// NOTE: 初始化一个 webview，no context
 class NoContextMenuWebView: WKWebView {
     var viewModel: EBookReaderViewModel?
 
-    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        guard let viewModel = viewModel else { return false }
-
-        return super.canPerformAction(action, withSender: sender)
-            && viewModel.editingActions.canPerformAction(action)
-    }
-
-    override public func buildMenu(with builder: any UIMenuBuilder) {
-        viewModel?.editingActions.buildMenu(with: builder)
-    }
+    // override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    //     guard let viewModel = viewModel else { return false }
+    //     // NOTE: 控制菜单动作的可用性等
+    //     return super.canPerformAction(action, withSender: sender)
+    //         && viewModel.editingActions.canPerformAction(action)
+    // }
+    // // NOTE: 自定义菜单
+    // override public func buildMenu(with builder: any UIMenuBuilder) {
+    //     viewModel?.editingActions.buildMenu(with: builder)
+    // }
 }
 
 class LoggingMessageHandler: NSObject, WKScriptMessageHandler {

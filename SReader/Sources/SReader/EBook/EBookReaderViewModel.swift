@@ -366,7 +366,7 @@ public extension EBookReaderViewModel {
 
         clearWebViewSelection()
     }
-
+    // NOTE: 设置在 webview 弹出的浮窗
     internal func setupActions() {
         var editingActions: [EditingAction] = ReaderEditingActions.allCases.compactMap {
             if $0 == .removeHighlight {

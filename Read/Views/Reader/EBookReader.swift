@@ -76,9 +76,9 @@ struct EBookReader: View {
                 Spacer()
             }
         }
-        .overlay {
-            StateOverlay(book: book, viewModel: $viewModel)
-        }
+//        .overlay {
+//            StateOverlay(book: book, viewModel: $viewModel)
+//        }
         .overlay {
             ReaderSettingsButton(
                 show: $showOverlay,
