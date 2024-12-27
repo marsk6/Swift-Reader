@@ -109,16 +109,16 @@ public struct EBookWebView: UIViewRepresentable {
 class NoContextMenuWebView: WKWebView {
     var viewModel: EBookReaderViewModel?
 
-    // override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-    //     guard let viewModel = viewModel else { return false }
-    //     // NOTE: 控制菜单动作的可用性等
-    //     return super.canPerformAction(action, withSender: sender)
-    //         && viewModel.editingActions.canPerformAction(action)
-    // }
-    // // NOTE: 自定义菜单
-    // override public func buildMenu(with builder: any UIMenuBuilder) {
-    //     viewModel?.editingActions.buildMenu(with: builder)
-    // }
+    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        guard let viewModel = viewModel else { return false }
+        // NOTE: 控制菜单动作的可用性等
+        return super.canPerformAction(action, withSender: sender)
+            && viewModel.editingActions.canPerformAction(action)
+    }
+    // NOTE: 自定义菜单
+    override public func buildMenu(with builder: any UIMenuBuilder) {
+        viewModel?.editingActions.buildMenu(with: builder)
+    }
 }
 
 class LoggingMessageHandler: NSObject, WKScriptMessageHandler {
