@@ -78,8 +78,8 @@ public struct EBookWebView: UIViewRepresentable {
         userContentController.add(LoggingMessageHandler(), name: "readerHandler")
 //        #endif
 
-//        webView.addInteraction(viewModel.editingActions.editMenuInteraction)
-//        webView.addInteraction(viewModel.highlightActions.editMenuInteraction)
+       webView.addInteraction(viewModel.editingActions.editMenuInteraction)
+       webView.addInteraction(viewModel.highlightActions.editMenuInteraction)
 //
         userContentController.add(context.coordinator, name: BookWebViewMessageHandlers.initiatedSwiftReader.rawValue)
 
